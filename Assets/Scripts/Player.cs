@@ -44,12 +44,20 @@ public class Player : MonoBehaviour
     {
         spriteIndex++;
 
-        if(spriteIndex >= sprites.Length)
-        {
+        if(spriteIndex >= sprites.Length) {
             spriteIndex = 0;
         }
 
         spriteRenderer.sprite = sprites[spriteIndex];
     }
+	
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "Obstacle") {
+			FindObjectOfType<GameManager>().GameOver();
+		} else if (other.gameObject.tag == "Scoring") {
+			FindObjectOfType<GameManager>().IncreaseScore();
+		}
+	}
 }
 
