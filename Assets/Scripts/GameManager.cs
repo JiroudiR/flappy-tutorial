@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	public Player player;
+    private const string V = "Cubes: ";
+    public Player player;
 	public Text scoreText;
 	public GameObject playButton;
 	public GameObject gameOver;
 	public GameObject getReady;
+	private GameObject square;
     private int score;
 
     private void Awake()
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     public void Play()
 	{
 		score = 0;
-		scoreText.text = score.ToString();
+		scoreText.text = V + score.ToString();
 		playButton.SetActive(false);
 		gameOver.SetActive(false);
 		getReady.SetActive(false);
@@ -53,10 +54,16 @@ public class GameManager : MonoBehaviour
 		playButton.SetActive(true);
 		Pause();
 	}
-	
-	public void IncreaseScore()
+
+    public Text GetScoreText()
+    {
+        return scoreText;
+    }
+
+    public void IncreaseScore(Text scoreText)
 	{
 		score++;
-		scoreText.text = score.ToString();
+        scoreText.text = V + score.ToString();
+		square.gameObject.SetActive(false);
 	}
 }
